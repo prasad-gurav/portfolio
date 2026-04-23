@@ -1,15 +1,22 @@
 "use client";
 
 import {
+  siDjango,
   siDocker,
+  siExpress,
   siFigma,
-  siFramer,
   siGit,
-  siGraphql,
   siGsap,
+  siJenkins,
+  siJira,
+  siJavascript,
+  siLinux,
+  siMongodb,
   siPostgresql,
-  siRedis,
+  siPython,
+  siRedux,
   siTailwindcss,
+  siThreedotjs,
 } from "simple-icons";
 import type { SimpleIcon } from "simple-icons";
 import type { skills } from "@/data/content";
@@ -30,21 +37,28 @@ const brandBySkill: Record<
   | { kind: "motion" }
   | { kind: "aws" }
 > = {
+  JavaScript: { kind: "simple", icon: siJavascript },
   TypeScript: { kind: "shadcn", variant: "ts" },
   React: { kind: "shadcn", variant: "react" },
   "Next.js": { kind: "shadcn", variant: "next" },
-  "Node.js": { kind: "shadcn", variant: "node" },
   "Tailwind CSS": { kind: "simple", icon: siTailwindcss },
-  GraphQL: { kind: "simple", icon: siGraphql },
-  PostgreSQL: { kind: "simple", icon: siPostgresql },
-  Redis: { kind: "simple", icon: siRedis },
-  Docker: { kind: "simple", icon: siDocker },
-  AWS: { kind: "aws" },
-  Git: { kind: "simple", icon: siGit },
-  Figma: { kind: "simple", icon: siFigma },
-  Framer: { kind: "simple", icon: siFramer },
+  Redux: { kind: "simple", icon: siRedux },
   Motion: { kind: "motion" },
   GSAP: { kind: "simple", icon: siGsap },
+  "Three.js": { kind: "simple", icon: siThreedotjs },
+  "Node.js": { kind: "shadcn", variant: "node" },
+  Express: { kind: "simple", icon: siExpress },
+  Python: { kind: "simple", icon: siPython },
+  Django: { kind: "simple", icon: siDjango },
+  PostgreSQL: { kind: "simple", icon: siPostgresql },
+  MongoDB: { kind: "simple", icon: siMongodb },
+  Git: { kind: "simple", icon: siGit },
+  Docker: { kind: "simple", icon: siDocker },
+  AWS: { kind: "aws" },
+  Jenkins: { kind: "simple", icon: siJenkins },
+  Linux: { kind: "simple", icon: siLinux },
+  Jira: { kind: "simple", icon: siJira },
+  Figma: { kind: "simple", icon: siFigma },
 };
 
 export function SkillPillIcon({

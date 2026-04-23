@@ -3,14 +3,12 @@
 import {
   contact,
   education,
-  hackathons,
   profile,
   projectShowcase,
   quote,
   skills,
   work
 } from "@/data/content";
-import { motion } from "motion/react";
 import { FloatingDock } from "./FloatingDock";
 import { HeroEntrance } from "./HeroEntrance";
 import { ScrollSection } from "./ScrollSection";
@@ -79,8 +77,17 @@ export function PortfolioPage() {
                   {job.range}
                 </p>
                 <p className="mt-1 text-lg font-semibold">{job.company}</p>
-                <p className="text-sm text-foreground/60">{job.role}</p>
-                <p className="mt-2 text-sm leading-relaxed text-foreground/75">{job.blurb}</p>
+                <p className="text-sm text-foreground/60">
+                  {job.role}
+                  {"location" in job && job.location ? ` · ${job.location}` : ""}
+                </p>
+                <ul className="mt-3 list-inside list-disc space-y-1.5 pl-0.5 text-sm leading-relaxed text-foreground/75">
+                  {job.highlights.map((h) => (
+                    <li key={h} className="pl-0">
+                      {h}
+                    </li>
+                  ))}
+                </ul>
               </li>
             ))}
           </ol>
@@ -94,17 +101,19 @@ export function PortfolioPage() {
               detail={projectShowcase.mobile.detail}
               surface="light"
               mockup="phones"
+              href={projectShowcase.mobile.href}
             />
             <TiltShowcase
               title={projectShowcase.web.label}
               detail={projectShowcase.web.detail}
               surface="light"
               mockup="windows"
+              href={projectShowcase.web.href}
             />
           </div>
         </ScrollSection>
 
-        <ScrollSection className="mt-24" id="hacks" variant="tight">
+        {/* <ScrollSection className="mt-24" id="hacks" variant="tight">
           <SectionTitle kicker="Events" title="Hackathons" />
           <p className="text-sm text-foreground/70">
             I&apos;ve been a part of {hackathons.count}+ hackathons. {hackathons.subline}
@@ -125,7 +134,7 @@ export function PortfolioPage() {
               </motion.div>
             ))}
           </div>
-        </ScrollSection>
+        </ScrollSection> */}
 
         {/* <ScrollSection className="mt-24" id="hire">
           <SectionTitle kicker="How I work" title="Hire & collaborate" />
@@ -155,20 +164,42 @@ export function PortfolioPage() {
 
         <ScrollSection className="mt-24" id="contact" variant="tight">
           <SectionTitle title="Get in touch" />
-          <p className="text-sm text-foreground/75">
-            Want to chat? Reach out on{" "}
-            <a
-              className="font-medium text-foreground underline decoration-foreground/25 underline-offset-2 transition hover:decoration-foreground/50"
-              href={contact.x}
-            >
-              X
-            </a>
-            , or email me at{" "}
+          <p className="text-sm leading-relaxed text-foreground/75">
+            {contact.name} · {contact.phone} · Pune, MH
+          </p>
+          <p className="mt-3 text-sm text-foreground/75">
             <a
               className="font-medium text-foreground underline decoration-foreground/25 underline-offset-2 transition hover:decoration-foreground/50"
               href={`mailto:${contact.email}`}
             >
               {contact.email}
+            </a>{" "}
+            ·{" "}
+            <a
+              className="font-medium text-foreground underline decoration-foreground/25 underline-offset-2 transition hover:decoration-foreground/50"
+              href={contact.linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              LinkedIn
+            </a>{" "}
+            ·{" "}
+            <a
+              className="font-medium text-foreground underline decoration-foreground/25 underline-offset-2 transition hover:decoration-foreground/50"
+              href={contact.github}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              GitHub
+            </a>{" "}
+            ·{" "}
+            <a
+              className="font-medium text-foreground underline decoration-foreground/25 underline-offset-2 transition hover:decoration-foreground/50"
+              href={contact.website}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              psgurav.in
             </a>
             .
           </p>

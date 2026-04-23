@@ -15,10 +15,10 @@ const geistMono = Geist_Mono({
 });
 
 const defaultDescription =
-  "Product-minded engineer building polished web products — TypeScript, React, and the modern full stack.";
+  "Software developer shipping full-stack web apps — React, Next.js, Node, and Django — from planning to production.";
 
 export const metadata: Metadata = {
-  title: "Prasad Gurav — Product & frontend engineer",
+  title: "Prasad Gurav — Software developer",
   description: defaultDescription,
 };
 

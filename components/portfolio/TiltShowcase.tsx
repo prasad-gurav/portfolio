@@ -6,6 +6,7 @@ import {
   useMotionValue,
   useSpring,
 } from "motion/react";
+import Link from "next/link";
 import { type PointerEvent } from "react";
 
 const spring = { stiffness: 280, damping: 30, mass: 0.4 };
@@ -151,6 +152,7 @@ export function TiltShowcase({
   detail,
   surface,
   mockup,
+  href,
 }: {
   title: string;
   detail: string;
@@ -158,6 +160,8 @@ export function TiltShowcase({
   surface: "light" | "dark";
   /** Phones: product / native framing; windows: web UI framing. */
   mockup: "phones" | "windows";
+  /** When set, the whole card navigates to this route (e.g. filtered projects list). */
+  href?: string;
 }) {
   const { transform, onMove, onLeave } = useTilt();
 
@@ -167,9 +171,9 @@ export function TiltShowcase({
     ? "shadow-[0_24px_80px_-32px_rgba(0,0,0,0.45)] hover:shadow-[0_32px_100px_-28px_rgba(0,0,0,0.5)]"
     : "shadow-[0_20px_60px_-24px_rgba(15,23,42,0.12)] hover:shadow-[0_24px_72px_-22px_rgba(15,23,42,0.16)]";
 
-  return (
+  const inner = (
     <motion.div
-      className={`group relative overflow-hidden rounded-2xl border border-foreground/10 p-6 transition-shadow duration-500 ${cardShadow}`}
+      className={`group relative block overflow-hidden rounded-2xl border border-foreground/10 p-6 transition-shadow duration-500 ${cardShadow} ${href ? "cursor-pointer" : ""}`}
       style={{ transformStyle: "preserve-3d", transform }}
       onPointerMove={onMove}
       onPointerLeave={onLeave}
@@ -205,4 +209,18 @@ export function TiltShowcase({
       </div>
     </motion.div>
   );
+
+  if (href) {
+    return (
+      <Link
+        href={href}
+        className="block rounded-2xl no-underline outline-offset-2 focus-visible:outline-2 focus-visible:outline-emerald-500/60"
+        scroll
+      >
+        {inner}
+      </Link>
+    );
+  }
+
+  return inner;
 }
