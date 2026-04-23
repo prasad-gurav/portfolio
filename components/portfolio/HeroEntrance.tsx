@@ -85,6 +85,14 @@ function useHeroVariants(reduce: boolean) {
   }, [reduce]);
 }
 
+const journeyBeamLoop = {
+  delay: 1.1,
+  duration: 2.5,
+  ease: "linear" as const,
+  repeat: Number.POSITIVE_INFINITY,
+  repeatDelay: 1.8,
+} as const;
+
 function HeroJourneyLine({
   reduce,
   from,
@@ -96,12 +104,12 @@ function HeroJourneyLine({
 }) {
   return (
     <div
-      className="mt-0.5 flex min-h-9 w-full min-w-0 flex-wrap items-center gap-y-1.5 sm:min-h-8"
+      className="mt-0.5 flex min-h-6 w-full min-w-0 flex-wrap items-center gap-y-0.5 sm:min-h-6"
       aria-label={`${from} to ${to}`}
     >
-      <span className="shrink-0 font-mono text-sm text-foreground/55 sm:text-base">{from}</span>
-      <div className="mx-1 flex min-w-[2.5rem] flex-1 items-center gap-0.5 sm:mx-1.5 sm:min-w-[4rem]">
-        <div className="h-px min-w-[1.5rem] flex-1 overflow-hidden rounded-full bg-foreground/5">
+      <span className="shrink-0 font-mono text-xs text-foreground/55 sm:text-sm">{from}</span>
+      <div className="mx-1 flex min-w-10 flex-1 items-center gap-0.5 sm:mx-1.5 sm:min-w-16">
+        <div className="relative h-px min-w-6 flex-1 overflow-hidden rounded-full bg-foreground/5">
           <motion.div
             className="h-full w-full origin-left bg-gradient-to-r from-emerald-500/55 via-foreground/30 to-foreground/10"
             initial={{ scaleX: 0 }}
@@ -112,22 +120,26 @@ function HeroJourneyLine({
                 : { duration: 0.75, delay: 0.4, ease: easeOutBrand }
             }
           />
+          {!reduce && (
+            <motion.div
+              aria-hidden
+              className="pointer-events-none absolute -top-1.5 bottom-0 left-0 z-[1] w-[min(3.25rem,36%)] min-w-6 will-change-transform"
+              style={{
+                background:
+                  "linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.5), rgba(16, 185, 129, 0.55), rgba(255, 255, 255, 0.4), transparent)",
+                boxShadow:
+                  "0 0 10px 2px rgba(16, 185, 129, 0.22), 0 0 20px 4px rgba(255, 255, 255, 0.09)",
+                filter: "blur(0.2px)",
+              }}
+              initial={{ x: "-25%" }}
+              animate={{ x: "300%" }}
+              transition={journeyBeamLoop}
+            />
+          )}
         </div>
-        <motion.span
-          className="shrink-0 text-foreground/40"
-          initial={{ opacity: 0, x: -4 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={
-            reduce
-              ? { duration: 0.1 }
-              : { delay: 0.85, duration: 0.4, ease: easeOutBrand }
-          }
-          aria-hidden
-        >
-          →
-        </motion.span>
+
       </div>
-      <span className="shrink-0 text-base text-foreground/90 sm:text-lg">{to}</span>
+      <span className="shrink-0 text-sm text-foreground/90 sm:text-base">{to}</span>
     </div>
   );
 }
