@@ -153,8 +153,8 @@ export function PortfolioPage() {
                 className="flex items-baseline justify-between gap-3 border-b border-foreground/10 pb-4 last:border-0 last:pb-0"
               >
                 <div>
-                  <p className="font-medium">{e.school}</p>
-                  <p className="text-sm text-foreground/60">{e.program}</p>
+                  <p className="font-medium">{e.program}</p>
+                  <p className="text-sm text-foreground/80">{e.school}</p>
                 </div>
                 <p className="shrink-0 text-xs text-foreground/45">{e.range}</p>
               </li>

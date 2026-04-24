@@ -1,3 +1,4 @@
+import { ThemeInitScript } from "@/components/theme/theme-init-script";
 import type { Metadata } from "next";
 import { Bricolage_Grotesque, Geist_Mono } from "next/font/google";
 import "./globals.css";
@@ -30,9 +31,11 @@ export default function RootLayout({
   return (
     <html
       lang="en"
+      suppressHydrationWarning
       className={`${bricolage.variable} ${geistMono.variable} h-full scroll-smooth antialiased`}
     >
       <body className="font-sans flex min-h-full flex-col text-base font-normal leading-relaxed">
+        <ThemeInitScript />
         {children}
       </body>
     </html>

@@ -12,7 +12,18 @@ import { cn } from "@/lib/utils";
 import { Moon, Sun } from "lucide-react";
 import { motion } from "motion/react";
 import type { ComponentType, Ref } from "react";
-import { useEffect, useRef, useState, useSyncExternalStore } from "react";
+import {
+  getResolvedIsDark,
+  getStoredTheme,
+  setStoredTheme,
+} from "@/lib/theme-storage";
+import {
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState,
+  useSyncExternalStore,
+} from "react";
 
 const dockItems = [
   { icon: TwitterXIcon, label: "X (Twitter)", href: contact.x },
@@ -112,13 +123,24 @@ function useSystemColorScheme() {
 
 function ThemeControl() {
   const systemDark = useSystemColorScheme();
+  /** `null` = follow system. Persisted in localStorage so client navigations keep the same mode. */
   const [userDark, setUserDark] = useState<boolean | null>(null);
+  const [themeReady, setThemeReady] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
-  const isDark = userDark === null ? systemDark : userDark;
+  const isDark = getResolvedIsDark(systemDark, userDark);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
+    const t = getStoredTheme();
+    setUserDark(
+      t === "dark" ? true : t === "light" ? false : null
+    );
+    setThemeReady(true);
+  }, []);
+
+  useLayoutEffect(() => {
+    if (!themeReady) return;
     document.documentElement.classList.toggle("dark", isDark);
-  }, [isDark]);
+  }, [isDark, themeReady]);
 
   return (
     <motion.button
@@ -127,12 +149,11 @@ function ThemeControl() {
       aria-label={isDark ? "Use light mode" : "Use dark mode"}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      onClick={() =>
-        setUserDark((prev) => {
-          const current = prev === null ? systemDark : prev;
-          return !current;
-        })
-      }
+      onClick={() => {
+        const next = !getResolvedIsDark(systemDark, userDark);
+        setStoredTheme(next ? "dark" : "light");
+        setUserDark(next);
+      }}
       className="relative flex shrink-0 items-center justify-center"
       whileHover={{ scale: 1.2, y: -8 }}
       transition={{ type: "spring", stiffness: 300, damping: 20 }}
