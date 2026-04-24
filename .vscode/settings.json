@@ -11,4 +11,5 @@
 	"editor.autoIndent": "full",
 	"editor.autoClosingBrackets": "always",
 	"editor.autoClosingQuotes": "always",
+	"editor.fontFamily": "Fira Code"
 }

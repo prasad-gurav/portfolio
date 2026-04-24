@@ -8,8 +8,9 @@ export const profile = {
 	} as const,
 	avatarInitials: "PG",
 	bio: [
-		"3+ years building production web: discovery, spec, and iteration with design and backend partners — Pune, India.",
-		"Stack focus: TypeScript, React, Next.js, Node, and Django REST — plus PostgreSQL, MongoDB, AWS, and Docker in real deployments.",
+		"Frontend-first engineer with 3 years shipping production-grade React and Next.js applications — from architecture to deployment",
+		"Full-stack depth across Node.js, Django REST, PostgreSQL, and AWS, with a proven track record of performance optimisation and scalable system design",
+		"Collaborative builder with end-to-end ownership: scoping, design handoff, API integration, and iteration — across teams, in real products, at scale.",
 	],
 } as const;
 
