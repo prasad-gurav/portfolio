@@ -8,15 +8,15 @@ import { TwitterXIcon } from "@/components/ui/twitter-x-icon";
 import type { AnimatedIconHandle, AnimatedIconProps } from "@/components/ui/types";
 import { WhatsappIcon } from "@/components/ui/whatsapp-icon";
 import { contact } from "@/data/content";
-import { cn } from "@/lib/utils";
-import { Moon, Sun } from "lucide-react";
-import { motion } from "motion/react";
-import type { ComponentType, Ref } from "react";
 import {
   getResolvedIsDark,
   getStoredTheme,
   setStoredTheme,
 } from "@/lib/theme-storage";
+import { cn } from "@/lib/utils";
+import { Moon, Sun } from "lucide-react";
+import { motion } from "motion/react";
+import type { ComponentType, Ref } from "react";
 import {
   useEffect,
   useLayoutEffect,
@@ -85,7 +85,7 @@ const DockItem = ({
       className="relative flex items-center justify-center"
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
-      whileHover={{ scale: 1.2, y: -8 }}
+      whileHover={{ scale: 1.05, y: -4 }}
       transition={{ type: "spring", stiffness: 300, damping: 20 }}
     >
       <span className="sr-only">{label}</span>
@@ -155,7 +155,7 @@ function ThemeControl() {
         setUserDark(next);
       }}
       className="relative flex shrink-0 items-center justify-center"
-      whileHover={{ scale: 1.2, y: -8 }}
+      whileHover={{ scale: 1.2, y: -4 }}
       transition={{ type: "spring", stiffness: 300, damping: 20 }}
     >
       <div

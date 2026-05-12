@@ -59,7 +59,7 @@ function LightPhoneStack() {
             <span className="h-1.5 w-4 rounded-sm bg-slate-200/80" />
           </div>
           {/* screen: list + media block */}
-          <div className="absolute left-2.5 right-2.5 top-9 space-y-1.5">
+          <div className="absolute left-2.5 right-2.5 top-8 space-y-1.5">
             <div className="h-2.5 w-full rounded-md bg-slate-200/90" />
             <div className="h-1.5 w-11/12 rounded-full bg-slate-200" />
             <div className="h-1.5 w-4/5 rounded-full bg-slate-200/80" />

@@ -1,4 +1,6 @@
 import { ProjectCover } from "@/components/projects/project-cover";
+import { ProjectGallery } from "@/components/projects/project-gallery";
+import { ProjectStack } from "@/components/projects/project-stack";
 import { getProjectBySlug, projects, type ProjectCategory } from "@/data/projects";
 import { contact, profile } from "@/data/content";
 import { ArrowLeft, ExternalLink } from "lucide-react";
@@ -75,20 +77,13 @@ export default async function ProjectDetailPage({ params }: Props) {
             <li key={h}>{h}</li>
           ))}
         </ul>
+
+        <ProjectGallery items={project.caseStudyGallery ?? []} />
       </div>
 
       <div className="mt-10">
         <h2 className="text-sm font-semibold text-foreground">Stack</h2>
-        <ul className="mt-2 flex flex-wrap gap-2 text-sm text-foreground/75">
-          {project.stack.map((s) => (
-            <li
-              key={s}
-              className="rounded-md border border-foreground/10 bg-foreground/[0.03] px-2.5 py-0.5"
-            >
-              {s}
-            </li>
-          ))}
-        </ul>
+        <ProjectStack stack={project.stack} />
       </div>
 
       {project.links.length > 0 && (
