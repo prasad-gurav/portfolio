@@ -24,36 +24,12 @@ export type Project = {
 
 export const projects = [
 	{
-		slug: "mirana-toys-app",
-		category: "mobile" as const,
-		title: "Mirana Toys",
-		shortDescription:
-			"Level map, rewards, and support tooling for a consumer play app at scale (50k+ actives).",
-		liveUrl: "https://miranatoys.com",
-		imageAlt: "Mirana Toys app preview",
-		role: "Software Developer · full-stack and product support",
-		stack: [
-			"React",
-			"Next.js",
-			"TypeScript",
-			"Node.js",
-			"Django",
-			"PostgreSQL",
-		],
-		overview:
-			"At Mirana Innovation I contributed to the consumer Mirana Toys experience and internal tooling. The Level Map module automates reward allocation and user progression, while the support panel centralises end-user issues for the team.",
-		highlights: [
-			"Engineered the Level Map backend to automate reward allocation and manage user level progression for 50k+ active app users.",
-			"Partnered with product on flows that stay reliable under real usage and can evolve with new promos and campaigns.",
-		],
-		links: [{ label: "miranatoys.com", href: "https://miranatoys.com" }],
-	},
-	{
 		slug: "bewatcher",
 		category: "web" as const,
 		title: "BeWatcher",
 		shortDescription:
 			"End-to-end movie tickets: discovery, real-time seat holds, and booking.",
+		liveUrl: "https://bewatcher-movie-ticket-booking.vercel.app/",
 		imageSrc: "/projects/bewatcher-movie-detail.png",
 		imageAlt:
 			"BeWatcher now showing grid — posters with ratings, titles, and top navigation",
@@ -93,7 +69,10 @@ export const projects = [
 		title: "Wexen Interior",
 		shortDescription:
 			"Scroll-driven marketing site for an interior design studio — motion and lead conversion.",
-		imageAlt: "Wexen Interior marketing site",
+		liveUrl: "https://www.wexeninterior.com/",
+		imageSrc: "/projects/wexen-interior-hero.png",
+		imageAlt:
+			"Wexen Interior hero — teal interior scene, navigation, and Crafting Your Unique Interior Design headline",
 		role: "Freelance · frontend",
 		stack: ["Next.js", "GSAP", "Tailwind CSS", "Locomotive Scroll"],
 		overview:
@@ -110,6 +89,7 @@ export const projects = [
 		title: "Neoedge",
 		shortDescription:
 			"Multi-account money movement demo: MongoDB transactions, balanced double-entry postings, idempotent transfers, and a React 19 + RTK Query dashboard.",
+		liveUrl: "https://neoedge.vercel.app/",
 		imageSrc: "/projects/neoedge-login.png",
 		imageAlt:
 			"Neoedge sign-in screen with split-layout branding and authenticated dashboard entry",

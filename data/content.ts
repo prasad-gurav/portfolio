@@ -74,7 +74,7 @@ export const projectShowcase = {
 		label: "Mobile & app-adjacent",
 		detail:
 			"Product flows, app backends, and interfaces that work great on the phone and at scale.",
-		href: "/projects?category=mobile" as const,
+		href: "/projects" as const,
 	},
 	web: {
 		label: "Web & product builds",

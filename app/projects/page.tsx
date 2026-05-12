@@ -3,7 +3,7 @@ import { Suspense } from "react";
 
 export const metadata = {
   title: "Projects — Prasad Gurav",
-  description: "Case studies: mobile, web, and full-stack work.",
+  description: "Case studies: personal web and full-stack projects.",
 };
 
 function ProjectsLoading() {

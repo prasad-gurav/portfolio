@@ -15,21 +15,29 @@ function normalizeCategory(value: string | null): ProjectCategory | "all" {
   return "all";
 }
 
-const tabs: { id: ProjectCategory | "all"; label: string }[] = [
-  { id: "all", label: "All" },
-  { id: "mobile", label: "Mobile" },
-  { id: "web", label: "Web" },
-];
-
 export function ProjectsList() {
   const search = useSearchParams();
+  const mobileCount = useMemo(
+    () => getProjectsByCategory("mobile").length,
+    []
+  );
+  const tabs = useMemo((): { id: ProjectCategory | "all"; label: string }[] => {
+    const t: { id: ProjectCategory | "all"; label: string }[] = [
+      { id: "all", label: "All" },
+    ];
+    if (mobileCount > 0) t.push({ id: "mobile", label: "Mobile" });
+    t.push({ id: "web", label: "Web" });
+    return t;
+  }, [mobileCount]);
   const category = useMemo(
     () => normalizeCategory(search.get("category")),
     [search]
   );
+  const effectiveCategory =
+    category === "mobile" && mobileCount === 0 ? "all" : category;
   const list = useMemo(
-    () => getProjectsByCategory(category),
-    [category]
+    () => getProjectsByCategory(effectiveCategory),
+    [effectiveCategory]
   );
 
   const hrefFor = useCallback((id: (typeof tabs)[number]["id"]) => {
@@ -52,7 +60,7 @@ export function ProjectsList() {
 
       <div className="mt-8 flex flex-wrap items-center gap-2">
         {tabs.map((t) => {
-          const active = t.id === category;
+          const active = t.id === effectiveCategory;
           return (
             <Link
               key={t.id}
