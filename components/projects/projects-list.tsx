@@ -94,6 +94,7 @@ export function ProjectsList() {
           <ProjectCard
             key={p.slug}
             project={p}
+            className={p.category === "mobile" ? "sm:col-span-2" : undefined}
             transitionDelay={i * 0.05}
           />
         ))}

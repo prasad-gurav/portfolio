@@ -1,6 +1,7 @@
 import { ProjectCover } from "@/components/projects/project-cover";
 import { ProjectGallery } from "@/components/projects/project-gallery";
 import { ProjectStack } from "@/components/projects/project-stack";
+import { ProjectVideoFigure } from "@/components/projects/project-video";
 import { getProjectBySlug, projects, type ProjectCategory } from "@/data/projects";
 import { contact, profile } from "@/data/content";
 import { ArrowLeft, ExternalLink } from "lucide-react";
@@ -39,74 +40,7 @@ export default async function ProjectDetailPage({ params }: Props) {
 
   return (
     <article className="relative z-10 mx-auto max-w-2xl px-5 pb-36 pt-16 sm:px-6 md:pt-20">
-      <p className="text-[11px] font-medium uppercase tracking-[0.2em] text-foreground/40">
-        {project.category === "mobile" ? "Mobile" : "Web"} · Case study
-      </p>
-      <div className="mt-2 flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
-        <h1 className="text-balance font-heading text-2xl font-bold tracking-[-0.02em] text-foreground sm:text-3xl">
-          {project.title}
-        </h1>
-        {hasLive && (
-          <a
-            href={project.liveUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex shrink-0 items-center gap-1.5 rounded-lg border border-foreground/10 bg-foreground/[0.03] px-3 py-1.5 text-sm font-medium text-foreground/85 transition hover:border-foreground/20"
-          >
-            Open live
-            <ExternalLink className="h-3.5 w-3.5" />
-          </a>
-        )}
-      </div>
-      <p className="mt-2 text-sm text-foreground/55">{project.role}</p>
-
-      <div className="mt-8">
-        <ProjectCover
-          title={project.title}
-          imageSrc={project.imageSrc}
-          imageAlt={project.imageAlt}
-          className="ring-1 ring-foreground/5"
-        />
-      </div>
-
-      <div className="mt-8 space-y-4 text-sm leading-relaxed text-foreground/80">
-        <p>{project.overview}</p>
-        <h2 className="pt-2 text-sm font-semibold text-foreground">Highlights</h2>
-        <ul className="list-inside list-disc space-y-2 text-foreground/80">
-          {project.highlights.map((h) => (
-            <li key={h}>{h}</li>
-          ))}
-        </ul>
-
-        <ProjectGallery items={project.caseStudyGallery ?? []} />
-      </div>
-
-      <div className="mt-10">
-        <h2 className="text-sm font-semibold text-foreground">Stack</h2>
-        <ProjectStack stack={project.stack} />
-      </div>
-
-      {project.links.length > 0 && (
-        <div className="mt-8">
-          <h2 className="text-sm font-semibold text-foreground">Links</h2>
-          <ul className="mt-2 space-y-1.5 text-sm">
-            {project.links.map((l) => (
-              <li key={l.href}>
-                <a
-                  href={l.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="font-medium text-emerald-600 underline decoration-emerald-500/30 underline-offset-2 transition hover:decoration-emerald-500/50 dark:text-emerald-400"
-                >
-                  {l.label}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </div>
-      )}
-
-      <div className="mt-12 flex flex-wrap items-center gap-4 text-sm text-foreground/60">
+      <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-foreground/60">
         <Link
           href={categoryPath(project.category)}
           className="inline-flex items-center gap-1.5 font-medium text-foreground/80 transition hover:text-foreground"
@@ -130,7 +64,78 @@ export default async function ProjectDetailPage({ params }: Props) {
         </Link>
       </div>
 
-      <p className="mt-8 text-sm text-foreground/45">
+      <p className="mt-6 text-[11px] font-medium uppercase tracking-[0.2em] text-foreground/40">
+        {project.category === "mobile" ? "Mobile" : "Web"} · Case study
+      </p>
+      <div className="mt-2 flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+        <h1 className="text-balance font-heading text-2xl font-bold tracking-[-0.02em] text-foreground sm:text-3xl">
+          {project.title}
+        </h1>
+        {hasLive && (
+          <a
+            href={project.liveUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex shrink-0 items-center gap-1.5 rounded-lg border border-foreground/10 bg-foreground/[0.03] px-3 py-1.5 text-sm font-medium text-foreground/85 transition hover:border-foreground/20"
+          >
+            Open live
+            <ExternalLink className="h-3.5 w-3.5" />
+          </a>
+        )}
+      </div>
+      <p className="mt-2 text-sm text-foreground/55">{project.role}</p>
+
+      <div className="mt-4">
+        <h2 className="text-sm font-semibold text-foreground">Stack</h2>
+        <ProjectStack stack={project.stack} />
+      </div>
+
+      <div className="mt-8">
+        <ProjectCover
+          title={project.title}
+          imageSrc={project.imageSrc}
+          imageAlt={project.imageAlt}
+          variant={project.category === "mobile" ? "mobile" : "default"}
+          className="ring-1 ring-foreground/5"
+        />
+      </div>
+
+      <div className="mt-8 space-y-4 text-sm leading-relaxed text-foreground/80">
+        <p>{project.overview}</p>
+        <h2 className="pt-2 text-sm font-semibold text-foreground">Highlights</h2>
+        <ul className="list-inside list-disc space-y-2 text-foreground/80">
+          {project.highlights.map((h) => (
+            <li key={h}>{h}</li>
+          ))}
+        </ul>
+
+        {project.caseStudyVideo ? (
+          <ProjectVideoFigure video={project.caseStudyVideo} />
+        ) : null}
+        <ProjectGallery items={project.caseStudyGallery ?? []} />
+      </div>
+
+      {project.links.length > 0 && (
+        <div className="mt-8">
+          <h2 className="text-sm font-semibold text-foreground">Links</h2>
+          <ul className="mt-2 space-y-1.5 text-sm">
+            {project.links.map((l) => (
+              <li key={l.href}>
+                <a
+                  href={l.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-medium text-emerald-600 underline decoration-emerald-500/30 underline-offset-2 transition hover:decoration-emerald-500/50 dark:text-emerald-400"
+                >
+                  {l.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+
+      <p className="mt-12 text-sm text-foreground/45">
         {profile.name} · {contact.email}
       </p>
     </article>

@@ -20,6 +20,7 @@ export function ProjectCard({
   const hasLive =
     project.liveUrl &&
     (project.liveUrl.startsWith("https://") || project.liveUrl.startsWith("http://"));
+  const isMobile = project.category === "mobile";
 
   return (
     <motion.article
@@ -36,8 +37,9 @@ export function ProjectCard({
     >
       <div
         className={cn(
-          "relative flex h-full flex-col overflow-hidden rounded-2xl border border-foreground/10 bg-foreground/[0.02] shadow-sm transition-[box-shadow,transform,background] duration-300",
-          "hover:-translate-y-0.5 hover:border-foreground/15 hover:shadow-md"
+          "relative overflow-hidden rounded-2xl border border-foreground/10 bg-foreground/[0.02] shadow-sm transition-[box-shadow,transform,background] duration-300",
+          "hover:-translate-y-0.5 hover:border-foreground/15 hover:shadow-md",
+          isMobile ? "flex min-h-[140px] flex-row" : "flex h-full flex-col",
         )}
       >
         <Link
@@ -45,18 +47,35 @@ export function ProjectCard({
           className="absolute inset-0 z-0 block rounded-2xl"
           aria-label={`View ${project.title} case study`}
         />
-        <div className="pointer-events-none relative z-10 flex h-full min-h-0 flex-1 flex-col">
+        <div
+          className={cn(
+            "pointer-events-none relative z-10 flex min-h-0 flex-1",
+            isMobile ? "flex-row" : "flex-col",
+          )}
+        >
           <ProjectCover
             title={project.title}
             imageSrc={project.imageSrc}
             imageAlt={project.imageAlt}
-            className="shrink-0"
+            variant={isMobile ? "mobile" : "default"}
+            mobileLayout={isMobile ? "inline" : "hero"}
+            className={cn(isMobile && "border-r border-foreground/10")}
           />
-          <div className="flex min-h-0 flex-1 flex-col gap-2 p-4">
+          <div
+            className={cn(
+              "flex min-w-0 flex-1 flex-col gap-2",
+              isMobile ? "justify-center p-4 pl-3" : "p-4",
+            )}
+          >
             <h2 className="text-balance text-lg font-semibold tracking-tight text-foreground">
               {project.title}
             </h2>
-            <p className="line-clamp-2 text-pretty text-sm leading-relaxed text-foreground/65">
+            <p
+              className={cn(
+                "text-pretty text-sm leading-relaxed text-foreground/65",
+                isMobile ? "line-clamp-3" : "line-clamp-2",
+              )}
+            >
               {project.shortDescription}
             </p>
             <div className="mt-auto flex items-center justify-between gap-2 pt-1">

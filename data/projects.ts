@@ -1,6 +1,14 @@
 export type ProjectCategory = "mobile" | "web";
 
-export type ProjectGalleryItem = { src: string; alt: string; caption?: string };
+export type ProjectGalleryItem = {
+	src: string;
+	alt: string;
+	caption?: string;
+	width?: number;
+	height?: number;
+};
+
+export type ProjectVideo = { src: string; caption?: string };
 
 export type Project = {
 	slug: string;
@@ -14,6 +22,8 @@ export type Project = {
 	imageAlt: string;
 	/** Extra figures on case study detail (beyond hero cover). */
 	caseStudyGallery?: readonly ProjectGalleryItem[];
+	/** Optional product walkthrough clip. */
+	caseStudyVideo?: ProjectVideo;
 	/** Detail page */
 	role: string;
 	stack: string[];
@@ -23,6 +33,86 @@ export type Project = {
 };
 
 export const projects = [
+	{
+		slug: "bewatcher-mobile",
+		category: "mobile" as const,
+		title: "BeWatcher Mobile",
+		shortDescription:
+			"Expo movie companion — TMDB discovery, Clerk auth, Appwrite collections, and offline-friendly caching.",
+		imageSrc: "/projects/bewatcher-mobile/home-trending.webp",
+		imageAlt:
+			"BeWatcher home — featured carousel and trending poster grid on a dark mobile UI",
+		caseStudyVideo: {
+			src: "/projects/bewatcher-mobile/app-walkthrough.mp4",
+			caption:
+				"End-to-end browse flow: home feeds, search, movie detail, and collection actions across tab navigation.",
+		},
+		caseStudyGallery: [
+			{
+				src: "/projects/bewatcher-mobile/movie-detail-cast-trailers.webp",
+				alt: "BeWatcher movie detail with genres, cast carousel, and official trailer grid",
+				caption:
+					"Enriched detail from TMDB: metadata, cast, trailers, and collection toggles synced to Appwrite.",
+				width: 720,
+				height: 1544,
+			},
+			{
+				src: "/projects/bewatcher-mobile/profile-favourites.webp",
+				alt: "BeWatcher profile with favourites tab, user card, and saved titles",
+				caption:
+					"Profile collections: Clerk identity at the top, tabbed favourites/watchlist with card actions and empty-state handling.",
+				width: 720,
+				height: 1544,
+			},
+			{
+				src: "/projects/bewatcher-mobile/profile-watchlist.webp",
+				alt: "BeWatcher profile watchlist with saved upcoming releases",
+				caption:
+					"Watchlist view — denormalised poster and metadata on each document so list screens avoid re-fetching TMDB.",
+				width: 720,
+				height: 1544,
+			},
+			{
+				src: "/projects/bewatcher-mobile/auth-onboarding.webp",
+				alt: "BeWatcher sign-in screen with poster collage and Google continue CTA",
+				caption:
+					"Auth gate: social sign-in via Clerk unlocks protected surfaces and ties Appwrite documents to userId.",
+				width: 720,
+				height: 1544,
+			},
+			{
+				src: "/projects/bewatcher-mobile/architecture-overview.webp",
+				alt: "BeWatcher system diagram — Expo client, TMDB, Clerk, and Appwrite integration",
+				caption:
+					"Integration topology: client orchestrates TMDB (catalog), Clerk (identity), and Appwrite (user collections) — no custom movie API.",
+				width: 1536,
+				height: 1024,
+			},
+		],
+		role: "Solo · mobile · integration",
+		stack: [
+			"Expo",
+			"React Native",
+			"TypeScript",
+			"Expo Router",
+			"Redux Toolkit",
+			"TanStack Query",
+			"TMDB",
+			"Clerk",
+			"Appwrite",
+			"EAS",
+		],
+		overview:
+			"A production-shaped mobile movie companion built as a distributed client: TMDB supplies catalog, search, and enriched detail; Clerk handles sign-in and session tokens; Appwrite stores per-user favourites and watchlist documents. Expo Router defines the journey skeleton, TanStack Query caches server state with optional disk persistence, and Redux holds catalog slices plus collection state mirrored from Appwrite — so anonymous browse, authenticated collections, and cold starts all feel continuous without a team-owned backend.",
+		highlights: [
+			"Composed three hosted services into one workflow — discover and search anonymously, sign in once, then persist favourites and watchlist tied to Clerk userId.",
+			"Query cache + Redux persist on launch: fewer blank screens on repeat visits and policy-defined freshness instead of hammering TMDB on every navigation.",
+			"Collection CRUD with optimistic detail toggles, profile refetch patterns, and sign-out store reset so the next session never leaks prior user data.",
+			"Trailer pipeline: filter official sources first, thumbnail fallbacks when CDN calls fail, playback delegated to the OS via YouTube deep links.",
+			"EAS-ready Expo config — secure store for tokens, web browser for OAuth, splash/loading gates, and env-separated keys for TMDB, Clerk, and Appwrite.",
+		],
+		links: [],
+	},
 	{
 		slug: "bewatcher",
 		category: "web" as const,

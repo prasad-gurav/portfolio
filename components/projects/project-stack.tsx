@@ -1,7 +1,10 @@
 "use client";
 
 import {
+  siAppwrite,
+  siClerk,
   siDjango,
+  siExpo,
   siExpress,
   siGsap,
   siMongodb,
@@ -10,6 +13,8 @@ import {
   siReactrouter,
   siRedux,
   siTailwindcss,
+  siTanstack,
+  siThemoviedatabase,
   siVite,
 } from "simple-icons";
 import type { SimpleIcon } from "simple-icons";
@@ -57,6 +62,14 @@ const stackIconByKey: Record<string, IconEntry> = {
   mongoose: { kind: "simple", icon: siMongoose },
   bcryptjs: { kind: "lucide", Icon: Shield },
   rest: { kind: "lucide", Icon: Globe },
+  expo: { kind: "simple", icon: siExpo },
+  "react native": { kind: "shadcn", variant: "react" },
+  "expo router": { kind: "simple", icon: siReactrouter },
+  "tanstack query": { kind: "simple", icon: siTanstack },
+  tmdb: { kind: "simple", icon: siThemoviedatabase },
+  clerk: { kind: "simple", icon: siClerk },
+  appwrite: { kind: "simple", icon: siAppwrite },
+  eas: { kind: "simple", icon: siExpo },
 };
 
 function resolveStackEntry(label: string): IconEntry {
